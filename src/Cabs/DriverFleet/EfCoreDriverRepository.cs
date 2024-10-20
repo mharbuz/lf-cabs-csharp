@@ -7,6 +7,7 @@ namespace LegacyFighter.Cabs.DriverFleet;
 public interface IDriverRepository
 {
   Task<Driver> Find(long? driverId);
+  Task<List<Driver>> FindAll();
   Task<Driver> Save(Driver driver);
   Task<List<Driver>> FindAllById(ICollection<long?> ids);
   Task<Maybe<Driver>> FindById(long? driverId);
@@ -31,6 +32,11 @@ internal class EfCoreDriverRepository : IDriverRepository
     return await Find(driverId).ToMaybeAsync();
   }
 
+
+  public async Task<List<Driver>> FindAll()
+  {
+    return await _context.Drivers.ToListAsync();
+  }
 
   public async Task<Driver> Save(Driver driver)
   {

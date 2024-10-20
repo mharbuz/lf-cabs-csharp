@@ -33,7 +33,7 @@ builder.Services.AddHostedService(ctx => ctx.GetRequiredService<EventLoop>());
 builder.Services.AddMediatR(typeof(Program));
 builder.Services.Configure<GraphDatabaseOptions>(
   builder.Configuration.GetSection("GraphDatabase"));
-builder.Services.AddSingleton(_ => SqLiteDbContext.CreateInMemoryDatabase());
+builder.Services.AddSingleton(_ => SqLiteDbContext.CreateInFileDatabase());
 builder.Services.AddSingleton(ctx => GraphDatabase.Driver(
   ctx.GetRequiredService<IOptions<GraphDatabaseOptions>>().Value.Uri, 
   AuthTokens.None));

@@ -19,4 +19,5 @@ public interface IDriverService
   Task<bool> Exists(long? driverId);
   Task MarkOccupied(long? driverId);
   Task MarkNotOccupied(long? driverId);
+  Task<IEnumerable<DriverDto>> LoadDrivers();
 }

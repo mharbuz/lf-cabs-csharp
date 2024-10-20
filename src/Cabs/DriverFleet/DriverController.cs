@@ -23,6 +23,12 @@ public class DriverController {
     return await _driverService.LoadDriver(driver.Id);
   }
 
+  [HttpGet("/drivers")]
+  public async Task<IEnumerable<DriverDto>> GetDrivers() 
+  {
+    return await _driverService.LoadDrivers();
+  }
+
   [HttpGet("/drivers/{id}")]
   public async Task<DriverDto> GetDriver(long id) 
   {

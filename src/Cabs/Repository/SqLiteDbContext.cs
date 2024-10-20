@@ -70,6 +70,13 @@ public class SqLiteDbContext : DbContext
     return connection;
   }
 
+  public static DbConnection CreateInFileDatabase()
+  {
+    var connection = new SqliteConnection("Filename=dblite.db");
+    connection.Open();
+    return connection;
+  }
+
   public SqLiteDbContext(DbConnection connection, EventsPublisher eventsPublisher)
   {
     _connection = connection;

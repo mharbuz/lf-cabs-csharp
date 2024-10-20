@@ -173,6 +173,12 @@ public class DriverService : IDriverService
       .Select(d => new DriverDto(d)).ToHashSet();
   }
 
+  public async Task<IEnumerable<DriverDto>> LoadDrivers()
+  {
+    var drivers = await _driverRepository.FindAll();
+    return drivers.Select(d => new DriverDto(d));
+  }
+
   public async Task AddAttribute(long driverId, DriverAttributeNames attr, string value)
   {
     var driver = await _driverRepository.Find(driverId);

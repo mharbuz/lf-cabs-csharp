@@ -56,11 +56,19 @@ public class TransactionalDriverService : IDriverService
     return driver;
   }
 
+  public async Task<IEnumerable<DriverDto>> LoadDrivers()
+  {
+    await using var tx = await _transactions.BeginTransaction();
+    var drivers = await _inner.LoadDrivers();
+    await tx.Commit();
+    return drivers;
+  }
+
   public async Task AddAttribute(long driverId, DriverAttributeNames attr, string value)
   {
     await _inner.AddAttribute(driverId, attr, value);
   }
-
+  
   public async Task<ISet<DriverDto>> LoadDrivers(ICollection<long?> ids)
   {
     return await _inner.LoadDrivers(ids);
